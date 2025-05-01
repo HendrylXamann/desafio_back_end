@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TournamentsRepository extends JpaRepository<Tournaments, Long> {
+    boolean existsByNameIgnoreCase(String name);
 }
