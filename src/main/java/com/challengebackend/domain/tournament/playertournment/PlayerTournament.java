@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -36,5 +37,29 @@ public class PlayerTournament {
         this.player = player;
         this.tournament = tournament;
         this.score = score;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PlayerTournament that = (PlayerTournament) o;
+        return Objects.equals(id, that.id) && Objects.equals(player, that.player) && Objects.equals(tournament, that.tournament) && Objects.equals(score, that.score) && Objects.equals(challengeScores, that.challengeScores);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, player, tournament, score, challengeScores);
+    }
+
+    @Override
+    public String toString() {
+        return "PlayerTournament{" +
+                "id=" + id +
+                ", player=" + player +
+                ", tournament=" + tournament +
+                ", score=" + score +
+                ", challengeScores=" + challengeScores +
+                '}';
     }
 }
