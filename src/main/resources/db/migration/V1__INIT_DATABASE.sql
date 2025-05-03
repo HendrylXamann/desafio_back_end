@@ -4,9 +4,9 @@ CREATE TABLE challenges (
     weight INT NOT NULL
 );
 
-CREATE TABLE players (
+CREATE TABLE player (
      id BIGINT AUTO_INCREMENT PRIMARY KEY,
-     name VARCHAR(255) NOT NULL UNIQUE
+     name VARCHAR(255) NOT NULL UNIQUE,
      age INT NOT NULL,
      country VARCHAR(255) NOT NULL
 );
@@ -23,6 +23,6 @@ CREATE TABLE player_tournament (
        player_id BIGINT NOT NULL,
        tournament_id BIGINT NOT NULL,
        score INT NOT NULL,
-       FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE,
+       FOREIGN KEY (player_id) REFERENCES player(id) ON DELETE CASCADE,
        FOREIGN KEY (tournament_id) REFERENCES tournaments(id) ON DELETE CASCADE
 );
