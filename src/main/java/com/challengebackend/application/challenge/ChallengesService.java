@@ -5,5 +5,5 @@ import com.challengebackend.adapters.challenges.payload.ChallengesForm;
 
 public interface ChallengesService {
 
-    ChallengesDTO challengeExecution(Long challengeId, ChallengesForm form);
+    ChallengesDTO challengeExecution(ChallengesForm form);
 }

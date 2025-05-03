@@ -2,9 +2,8 @@ package com.challengebackend.application.tournament.playertournment;
 
 import com.challengebackend.adapters.ranking.payload.PlayerRankingDTO;
 import com.challengebackend.common.messageerror.MessageError;
-import com.challengebackend.domain.challenge.Challenge;
+import com.challengebackend.common.valueobjects.ChallengeTypes;
 import com.challengebackend.domain.tournament.playertournment.PlayerTournament;
-import com.challengebackend.infrastructure.persistence.challenge.ChallengeRepository;
 import com.challengebackend.domain.challenge.challengescore.ChallengeScore;
 import com.challengebackend.common.exception.IllegalArgumentException;
 import com.challengebackend.infrastructure.persistence.tournament.PlayerTournamentRepository;
@@ -17,7 +16,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PlayerTournamentServiceImpl implements PlayerTournamentService{
     private final PlayerTournamentRepository playerTournamentRepository;
-    private final ChallengeRepository challengeRepository;
 
     @Override
     public List<PlayerRankingDTO> getGlobalRanking() {
@@ -42,14 +40,11 @@ public class PlayerTournamentServiceImpl implements PlayerTournamentService{
     }
 
     @Override
-    public void registerScore(Long playerTournamentId, Long challengeId, Integer score) {
+    public void registerScore(Long playerTournamentId, ChallengeTypes challengeType, Integer score) {
         PlayerTournament playerTournament = playerTournamentRepository.findById(playerTournamentId)
                 .orElseThrow(() -> new IllegalArgumentException(MessageError.PLAYER_TOURNAMENT_NOT_FOUND));
 
-        Challenge challenge = challengeRepository.findById(challengeId)
-                .orElseThrow(() -> new IllegalArgumentException(MessageError.CHALLENGE_NOT_FOUND));
-
-        ChallengeScore challengeScore = new ChallengeScore(playerTournament, challenge, score);
+        ChallengeScore challengeScore = new ChallengeScore(playerTournament, challengeType, score);
 
         playerTournament.getChallengeScores().add(challengeScore);
         playerTournament.setScore(playerTournament.getScore() + score);

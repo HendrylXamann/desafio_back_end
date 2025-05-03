@@ -1,10 +1,12 @@
 package com.challengebackend.domain.challenge.challengescore;
 
-import com.challengebackend.domain.challenge.Challenge;
+import com.challengebackend.common.valueobjects.ChallengeTypes;
 import com.challengebackend.domain.tournament.playertournment.PlayerTournament;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -17,17 +19,40 @@ public class ChallengeScore {
     @ManyToOne
     @JoinColumn(name = "player_tournament_id", nullable = false)
     private PlayerTournament playerTournament;
-    @ManyToOne
-    @JoinColumn(name = "challenge_id", nullable = false)
-    private Challenge challenge;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "challenge_type", nullable = false)
+    private ChallengeTypes challengeType;
     private Integer score;
 
     public ChallengeScore() {
     }
 
-    public ChallengeScore(PlayerTournament playerTournament, Challenge challenge, Integer score) {
+    public ChallengeScore(PlayerTournament playerTournament, ChallengeTypes challengeType, Integer score) {
         this.playerTournament = playerTournament;
-        this.challenge = challenge;
+        this.challengeType = challengeType;
         this.score = score;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ChallengeScore that = (ChallengeScore) o;
+        return Objects.equals(id, that.id) && Objects.equals(playerTournament, that.playerTournament) && challengeType == that.challengeType && Objects.equals(score, that.score);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, playerTournament, challengeType, score);
+    }
+
+    @Override
+    public String toString() {
+        return "ChallengeScore{" +
+                "id=" + id +
+                ", playerTournament=" + playerTournament +
+                ", challengeType=" + challengeType +
+                ", score=" + score +
+                '}';
     }
 }

@@ -13,7 +13,7 @@ public class ChallengesController implements ChallengesAPI{
     private final ChallengesService challengesService;
 
     @Override
-    public ResponseEntity<ChallengesDTO> executeChallenge(Long challengeId, ChallengesForm form) {
-        return ResponseEntity.ok(challengesService.challengeExecution(challengeId, form));
+    public ResponseEntity<ChallengesDTO> executeChallenge(ChallengesForm form) {
+        return ResponseEntity.ok(challengesService.challengeExecution(form));
     }
 }

@@ -6,7 +6,6 @@ import lombok.Data;
 
 @Data
 public class ChallengesDTO {
-    private Long id;
     private Integer fibonacciResult = 0;
     @JsonIgnore
     private PalindromeStatus palindromeResult = PalindromeStatus.NOT_AVAILABLE;
@@ -15,18 +14,15 @@ public class ChallengesDTO {
     public ChallengesDTO() {
     }
 
-    public ChallengesDTO(Long id, Integer fibonacciResult) {
-        this.id = id;
+    public ChallengesDTO(Integer fibonacciResult) {
         this.fibonacciResult = fibonacciResult;
     }
 
-    public ChallengesDTO(Long id, boolean palindromeResult) {
-        this.id = id;
+    public ChallengesDTO(boolean palindromeResult) {
         this.palindromeResult = palindromeResult ? PalindromeStatus.TRUE : PalindromeStatus.FALSE;
     }
 
-    public ChallengesDTO(Long id, int[] intNumbersSortedResult) {
-        this.id = id;
+    public ChallengesDTO(int[] intNumbersSortedResult) {
         this.intNumbersSortedResult = intNumbersSortedResult;
     }
 

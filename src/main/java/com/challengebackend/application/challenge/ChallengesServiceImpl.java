@@ -4,33 +4,31 @@ import com.challengebackend.adapters.challenges.payload.ChallengesDTO;
 import com.challengebackend.adapters.challenges.payload.ChallengesForm;
 import com.challengebackend.application.tournament.playertournment.PlayerTournamentService;
 import com.challengebackend.common.exception.IllegalArgumentException;
-import com.challengebackend.common.exception.ResourceNotFoundException;
 import com.challengebackend.common.messageerror.MessageError;
-import com.challengebackend.domain.challenge.Challenge;
+import com.challengebackend.common.utils.ChallengeWeightsUtil;
+import com.challengebackend.common.valueobjects.ChallengeTypes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import com.challengebackend.infrastructure.persistence.challenge.ChallengeRepository;
 
 @Service
 @RequiredArgsConstructor
 public class ChallengesServiceImpl implements ChallengesService{
-    private final ChallengeRepository challengeRepository;
     private final PlayerTournamentService playerTournamentService;
 
 
     @Override
-    public ChallengesDTO challengeExecution(Long challengeId, ChallengesForm form) {
-        Challenge challenge = getChallengeEntityById(challengeId);
+    public ChallengesDTO challengeExecution(ChallengesForm form) {
+        Integer weight = form.getWeight() != null ? form.getWeight() : ChallengeWeightsUtil.getWeight(form.getChallengeType());
 
         ChallengesDTO result;
         switch (form.getChallengeType()) {
-            case FIBONACCI -> result = new ChallengesDTO(challengeId, fibonacci(form));
-            case PALINDROME -> result = new ChallengesDTO(challengeId, isPalindrome(form));
-            case CUSTOM_SORT -> result = new ChallengesDTO(challengeId, customSort(form));
+            case FIBONACCI -> result = new ChallengesDTO(fibonacci(form));
+            case PALINDROME -> result = new ChallengesDTO(isPalindrome(form));
+            case CUSTOM_SORT -> result = new ChallengesDTO(customSort(form));
             default -> throw new IllegalArgumentException(MessageError.CHALLENGE_TYPE_NOT_FOUND);
         }
 
-        registerScoreIfNeeded(form.getPlayerTournamentId(), challenge);
+        registerScore(form.getPlayerTournamentId(), form.getChallengeType(), weight);
         return result;
     }
 
@@ -38,7 +36,7 @@ public class ChallengesServiceImpl implements ChallengesService{
         if (form.getNumber() == null){
          throw new IllegalArgumentException(MessageError.FIBONACCI_NUMBER_NOT_FOUND);
         }
-        return fibonacciCalc(form.getNumber());
+        return calculateFibonacci(form.getNumber());
     }
 
     private boolean isPalindrome(ChallengesForm form) {
@@ -55,7 +53,7 @@ public class ChallengesServiceImpl implements ChallengesService{
         return customSortLogic(form.getIntNumbers());
     }
 
-    private Integer fibonacciCalc(Integer numberParam) {
+    private Integer calculateFibonacci(Integer numberParam) {
         Integer position = numberParam;
         if (position == null || position < 0) {
             throw new IllegalArgumentException(MessageError.NUMBER_MUST_BE_NON_NEGATIVE_INTEGER);
@@ -81,31 +79,26 @@ public class ChallengesServiceImpl implements ChallengesService{
         return sanitized.equals(new StringBuilder(sanitized).reverse().toString());
     }
 
-    private int[] customSortLogic(int[] array) {
-        //feio mas funciona, pesquisar alteranativas melhores dps
-        for (int i = 0; i < array.length - 1; i++) {
-            for (int j = 0; j < array.length - i - 1; j++) {
-                if (array[j] > array[j + 1]) {
-                    int temp = array[j];
-                    array[j] = array[j + 1];
-                    array[j + 1] = temp;
+    private int[] customSortLogic(int[] numbers) {
+        int arrayLength = numbers.length;
+        for (int outerIndex = 0; outerIndex < arrayLength - 1; outerIndex++) {
+            for (int innerIndex = 0; innerIndex < arrayLength - outerIndex - 1; innerIndex++) {
+                if (numbers[innerIndex] > numbers[innerIndex + 1]) {
+                    int temporaryValue = numbers[innerIndex];
+                    numbers[innerIndex] = numbers[innerIndex + 1];
+                    numbers[innerIndex + 1] = temporaryValue;
                 }
             }
         }
-        return array;
+        return numbers;
     }
 
-    private Challenge getChallengeEntityById(Long id) {
-        return challengeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(MessageError.CHALLENGE_NOT_FOUND));
-    }
-
-    private void registerScoreIfNeeded(Long playerTournamentId, Challenge challenge) {
+    private void registerScore(Long playerTournamentId, ChallengeTypes challengeType, Integer weight) {
         if (playerTournamentId != null) {
             playerTournamentService.registerScore(
                     playerTournamentId,
-                    challenge.getId(),
-                    challenge.getWeight()
+                    challengeType,
+                    weight
             );
         }
     }
