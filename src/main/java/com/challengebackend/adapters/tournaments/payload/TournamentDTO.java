@@ -1,6 +1,6 @@
 package com.challengebackend.adapters.tournaments.payload;
 
-import com.challengebackend.domain.tournaments.Tournaments;
+import com.challengebackend.domain.tournament.Tournament;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -15,7 +15,7 @@ public class TournamentDTO {
     public TournamentDTO() {
     }
 
-    public TournamentDTO(Tournaments tournament) {
+    public TournamentDTO(Tournament tournament) {
         this.id = tournament.getId();
         this.name = tournament.getName();
         this.date = tournament.getDate();

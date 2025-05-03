@@ -1,6 +1,6 @@
 package com.challengebackend.adapters.players.payload;
 
-import com.challengebackend.domain.players.Players;
+import com.challengebackend.domain.player.Player;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -18,7 +18,7 @@ public class PlayerDTO {
     public PlayerDTO() {
     }
 
-    public PlayerDTO(Players player) {
+    public PlayerDTO(Player player) {
         this.id = player.getId();
         this.playerName = player.getName();
         this.playerAge = player.getAge();

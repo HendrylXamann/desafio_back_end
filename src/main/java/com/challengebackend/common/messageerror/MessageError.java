@@ -26,7 +26,8 @@ public enum MessageError {
     PALINDROME_INPUTSTRING_NOT_FOUND(400, "PALINDROME_INPUTSTRING_NOT_FOUND", "Palindrome input string not found"),
     CUSTOM_SORT_ARRAY_NOT_FOUND(400, "CUSTOM_SORT_ARRAY_NOT_FOUND", "Custom sort array not found"),
     NUMBER_MUST_BE_NON_NEGATIVE_INTEGER(400, "NUMBER_MUST_BE_NON_NEGATIVE_INTEGER", "Number must be a non-negative integer"),
-    PLAYER_TOURNAMENT_NOT_FOUND(404, "PLAYER_TOURNAMENT_NOT_FOUND", "Player tournament not found"),;
+    PLAYER_TOURNAMENT_NOT_FOUND(404, "PLAYER_TOURNAMENT_NOT_FOUND", "Player tournament not found"),
+    CHALLENGE_TYPE_NOT_FOUND(400, "CHALLENGE_TYPE_NOT_FOUND", "Challenge type not found"),;
 
     private final int status;
     private final String code;

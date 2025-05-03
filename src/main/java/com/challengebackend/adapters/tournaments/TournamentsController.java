@@ -3,7 +3,7 @@ package com.challengebackend.adapters.tournaments;
 import com.challengebackend.adapters.tournaments.payload.TournamentDTO;
 import com.challengebackend.adapters.tournaments.payload.TournamentForm;
 import com.challengebackend.adapters.tournaments.payload.TournamentPlayerForm;
-import com.challengebackend.application.tournaments.TournamentsService;
+import com.challengebackend.application.tournament.TournamentsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;

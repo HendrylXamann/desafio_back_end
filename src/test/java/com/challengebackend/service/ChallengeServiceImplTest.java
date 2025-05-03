@@ -1,14 +1,14 @@
 package com.challengebackend.service;
 
-import com.challengebackend.infrastructure.persistence.tournament.TournamentsRepository;
+import com.challengebackend.infrastructure.persistence.challenge.ChallengeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-class TournamentsServiceImplTest {
+class ChallengeServiceImplTest {
 
     @Mock
-    private TournamentsRepository tournamentsRepository;
+    private ChallengeRepository challengeRepository;
 
     @BeforeEach
     void setUp() {

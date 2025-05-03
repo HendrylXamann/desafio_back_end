@@ -3,7 +3,7 @@ package com.challengebackend.adapters.players;
 import com.challengebackend.adapters.players.payload.PlayerDTO;
 import com.challengebackend.adapters.players.payload.PlayerFilterForm;
 import com.challengebackend.adapters.players.payload.PlayerForm;
-import com.challengebackend.application.players.PlayersService;
+import com.challengebackend.application.player.PlayersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,6 +43,4 @@ public class PlayersController implements PlayersAPI{
     public ResponseEntity<?> deletePlayer(Long id) {
         return ResponseEntity.ok(playersService.deletePlayer(id));
     }
-
-
 }

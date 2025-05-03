@@ -10,4 +10,5 @@ public class ChallengesForm {
     private String inputString;
     private int[] intNumbers;
     private Integer weight;
+    private Long playerTournamentId;
 }
