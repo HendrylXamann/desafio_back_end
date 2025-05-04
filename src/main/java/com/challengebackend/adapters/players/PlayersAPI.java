@@ -25,7 +25,7 @@ public interface PlayersAPI {
 
     @Operation(summary = "Search players by name", description = "Fetches players whose names match the given filter")
     @GetMapping("/name")
-    ResponseEntity<List<PlayerDTO>> getPlayersByName(@Valid @RequestBody PlayerFilterForm form);
+    ResponseEntity<List<PlayerDTO>> getPlayersByName(@RequestParam String playerName);
 
     @Operation(summary = "Get all players", description = "Fetches all registered players")
     @GetMapping("/all")

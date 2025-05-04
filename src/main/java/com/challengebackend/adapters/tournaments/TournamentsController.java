@@ -20,6 +20,11 @@ public class TournamentsController implements TournamentsAPI {
     }
 
     @Override
+    public ResponseEntity<List<TournamentDTO>> allTournaments() {
+        return ResponseEntity.ok(tournamentsService.findAll());
+    }
+
+    @Override
     public ResponseEntity<?> addPlayerToTournament(Long tournamentId, TournamentPlayerForm form) {
         return ResponseEntity.ok(tournamentsService.addPlayerToTournament(tournamentId, form));
     }

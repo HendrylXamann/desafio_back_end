@@ -20,10 +20,10 @@ public class PlayerTournament {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "player_id", nullable = false)
+    @JoinColumn(name = "player_id")
     private Player player;
     @ManyToOne
-    @JoinColumn(name = "tournament_id", nullable = false)
+    @JoinColumn(name = "tournament_id")
     private Tournament tournament;
     private Integer score;
     @OneToMany(mappedBy = "playerTournament", cascade = CascadeType.ALL)
@@ -44,12 +44,12 @@ public class PlayerTournament {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PlayerTournament that = (PlayerTournament) o;
-        return Objects.equals(id, that.id) && Objects.equals(player, that.player) && Objects.equals(tournament, that.tournament) && Objects.equals(score, that.score) && Objects.equals(challengeScores, that.challengeScores);
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, player, tournament, score, challengeScores);
+        return Objects.hash(id);
     }
 
     @Override

@@ -33,4 +33,8 @@ public interface TournamentsAPI {
     @Operation(summary = "Finalize a tournament", description = "Marks a tournament as finalized")
     @PutMapping("/{tournamentId}/finalize")
     ResponseEntity<?> finalizeTournament(@PathVariable Long tournamentId);
+
+    @Operation(summary = "List all tournaments", description = "Fetches all tournaments in the system")
+    @GetMapping("/all")
+    ResponseEntity<List<TournamentDTO>> allTournaments();
 }

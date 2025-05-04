@@ -12,7 +12,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@Table(name = "players")
+@Table(name = "player")
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,12 +38,12 @@ public class Player {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Player player = (Player) o;
-        return Objects.equals(id, player.id) && Objects.equals(name, player.name) && Objects.equals(tournaments, player.tournaments);
+        return Objects.equals(id, player.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, tournaments);
+        return Objects.hash(id);
     }
 
     @Override
@@ -51,6 +51,8 @@ public class Player {
         return "Player{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", age=" + age +
+                ", country='" + country + '\'' +
                 ", tournaments=" + tournaments +
                 '}';
     }

@@ -31,8 +31,8 @@ public class PlayersServiceImpl implements PlayersService{
     }
 
     @Override
-    public List<PlayerDTO> findByName(PlayerFilterForm form) {
-        List<Player> players = playerRepository.findByNameContainingIgnoreCase(form.getPlayerName());
+    public List<PlayerDTO> findByName(String playerName) {
+        List<Player> players = playerRepository.findByNameContainingIgnoreCase(playerName);
         return players.stream()
                 .map(player -> new PlayerDTO(player.getId(), player.getName()))
                 .toList();

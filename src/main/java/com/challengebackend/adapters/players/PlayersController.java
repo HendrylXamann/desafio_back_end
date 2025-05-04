@@ -25,8 +25,8 @@ public class PlayersController implements PlayersAPI{
     }
 
     @Override
-    public ResponseEntity<List<PlayerDTO>> getPlayersByName(PlayerFilterForm form) {
-        return ResponseEntity.ok(playersService.findByName(form));
+    public ResponseEntity<List<PlayerDTO>> getPlayersByName(String playerName) {
+        return ResponseEntity.ok(playersService.findByName(playerName));
     }
 
     @Override

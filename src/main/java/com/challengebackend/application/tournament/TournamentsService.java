@@ -18,4 +18,6 @@ public interface TournamentsService {
     List<String> findAllPlayersByTournamentId(Long tournamentId);
 
     ReturnMessage finalizeTournament(Long tournamentId);
+
+    List<TournamentDTO> findAll();
 }

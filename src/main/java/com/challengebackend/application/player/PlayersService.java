@@ -18,7 +18,7 @@ public interface PlayersService {
 
     ReturnMessage deletePlayer(Long id);
 
-    List<PlayerDTO> findByName(PlayerFilterForm form);
+    List<PlayerDTO> findByName(String playerName);
 
     List<PlayerDTO> findAll();
 

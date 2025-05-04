@@ -31,6 +31,13 @@ public class TournamentsServiceImpl implements TournamentsService {
     }
 
     @Override
+    public List<TournamentDTO> findAll() {
+        return tournamentsRepository.findAll()
+                .stream().map(TournamentDTO::new)
+                .toList();
+    }
+
+    @Override
     public ReturnMessage addPlayerToTournament(Long tournamentId, TournamentPlayerForm form) {
         Tournament tournamentFind = getTournamentsEntityById(tournamentId);
         validateTournamentAlreadyFinalized(tournamentFind);
