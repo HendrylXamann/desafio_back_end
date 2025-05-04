@@ -15,7 +15,7 @@ Esta é uma API REST desenvolvida em Java com Spring Boot para gerenciamento de 
 - **Spring Boot**: 3.4.5
 - **JPA / Hibernate** para mapeamento objeto-relacional
 - **PostgreSQL**: latest
-- **Docker**: 24.0+
+- **Docker**: 26.1.3
 - **Flyway**: para versionamento de schema
 - **Swagger / Springdoc OpenAPI**: 2.7.0
 
