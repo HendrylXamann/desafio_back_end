@@ -8,7 +8,7 @@ import com.challengebackend.common.valueobjects.ReturnMessage;
 
 import java.util.List;
 
-public interface TournamentsService {
+public interface TournamentService {
 
     TournamentDTO createTournament(TournamentForm form);
 

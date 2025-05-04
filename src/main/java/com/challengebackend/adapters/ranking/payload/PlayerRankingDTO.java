@@ -8,6 +8,9 @@ public class PlayerRankingDTO {
     private String playerName;
     private Integer score;
 
+    public PlayerRankingDTO() {
+    }
+
     public PlayerRankingDTO(String playerName, Integer score, Integer positionRanking) {
         this.positionRanking = positionRanking;
         this.playerName = playerName;

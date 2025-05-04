@@ -21,7 +21,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class TournamentsServiceImpl implements TournamentsService {
+public class TournamentServiceImpl implements TournamentService {
     private final TournamentRepository tournamentsRepository;
     private final PlayersService playersService;
 
