@@ -3,6 +3,7 @@ package com.challengebackend.adapters.tournaments;
 import com.challengebackend.adapters.tournaments.payload.TournamentDTO;
 import com.challengebackend.adapters.tournaments.payload.TournamentForm;
 import com.challengebackend.adapters.tournaments.payload.TournamentPlayerForm;
+import com.challengebackend.adapters.tournaments.payload.TournmentPlayerDTO;
 import com.challengebackend.application.tournament.TournamentsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +36,7 @@ public class TournamentsController implements TournamentsAPI {
     }
 
     @Override
-    public ResponseEntity<List<String>> listPlayersInTournament(Long tournamentId) {
+    public ResponseEntity<List<TournmentPlayerDTO>> listPlayersInTournament(Long tournamentId) {
         return ResponseEntity.ok(tournamentsService.findAllPlayersByTournamentId(tournamentId));
     }
 

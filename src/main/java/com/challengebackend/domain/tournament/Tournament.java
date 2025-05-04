@@ -21,7 +21,7 @@ public class Tournament {
     private LocalDate date;
     private boolean isFinalized = false;
 
-    @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<PlayerTournament> players = new HashSet<>();
 
     public Tournament() {

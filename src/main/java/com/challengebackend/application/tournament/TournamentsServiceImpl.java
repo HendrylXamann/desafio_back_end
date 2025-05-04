@@ -3,6 +3,7 @@ package com.challengebackend.application.tournament;
 import com.challengebackend.adapters.tournaments.payload.TournamentDTO;
 import com.challengebackend.adapters.tournaments.payload.TournamentForm;
 import com.challengebackend.adapters.tournaments.payload.TournamentPlayerForm;
+import com.challengebackend.adapters.tournaments.payload.TournmentPlayerDTO;
 import com.challengebackend.application.player.PlayersService;
 import com.challengebackend.common.exception.ResourceNotFoundException;
 import com.challengebackend.common.exception.IllegalArgumentException;
@@ -12,6 +13,7 @@ import com.challengebackend.domain.player.Player;
 import com.challengebackend.domain.tournament.playertournment.PlayerTournament;
 import com.challengebackend.domain.tournament.Tournament;
 import com.challengebackend.infrastructure.persistence.tournament.TournamentRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +40,7 @@ public class TournamentsServiceImpl implements TournamentsService {
     }
 
     @Override
+    @Transactional
     public ReturnMessage addPlayerToTournament(Long tournamentId, TournamentPlayerForm form) {
         Tournament tournamentFind = getTournamentsEntityById(tournamentId);
         validateTournamentAlreadyFinalized(tournamentFind);
@@ -58,6 +61,7 @@ public class TournamentsServiceImpl implements TournamentsService {
     }
 
     @Override
+    @Transactional
     public ReturnMessage removePlayerToTournament(Long tournamentId, TournamentPlayerForm form) {
         Tournament tournamentFind = getTournamentsEntityById(tournamentId);
         Player player = playersService.getPlayerEntityById(form.playerId());
@@ -74,10 +78,14 @@ public class TournamentsServiceImpl implements TournamentsService {
     }
 
     @Override
-    public List<String> findAllPlayersByTournamentId(Long tournamentId) {
+    public List<TournmentPlayerDTO> findAllPlayersByTournamentId(Long tournamentId) {
         Tournament tournamentFind = getTournamentsEntityById(tournamentId);
         return tournamentFind.getPlayers().stream()
-                .map(playerTournament -> playerTournament.getPlayer().getName())
+                .map(playerTournament -> new TournmentPlayerDTO(
+                        playerTournament.getPlayer().getId(),
+                        playerTournament.getPlayer().getName(),
+                        new TournamentDTO(tournamentFind)
+                ))
                 .toList();
     }
 

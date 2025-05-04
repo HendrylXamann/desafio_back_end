@@ -3,6 +3,7 @@ package com.challengebackend.adapters.tournaments;
 import com.challengebackend.adapters.tournaments.payload.TournamentDTO;
 import com.challengebackend.adapters.tournaments.payload.TournamentForm;
 import com.challengebackend.adapters.tournaments.payload.TournamentPlayerForm;
+import com.challengebackend.adapters.tournaments.payload.TournmentPlayerDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -28,7 +29,7 @@ public interface TournamentsAPI {
 
     @Operation(summary = "List players in a tournament", description = "Fetches all players participating in a specific tournament")
     @GetMapping("/{tournamentId}/all-players")
-    ResponseEntity<List<String>> listPlayersInTournament(@PathVariable Long tournamentId);
+    ResponseEntity<List<TournmentPlayerDTO>> listPlayersInTournament(@PathVariable Long tournamentId);
 
     @Operation(summary = "Finalize a tournament", description = "Marks a tournament as finalized")
     @PutMapping("/{tournamentId}/finalize")

@@ -3,6 +3,7 @@ package com.challengebackend.application.tournament;
 import com.challengebackend.adapters.tournaments.payload.TournamentDTO;
 import com.challengebackend.adapters.tournaments.payload.TournamentForm;
 import com.challengebackend.adapters.tournaments.payload.TournamentPlayerForm;
+import com.challengebackend.adapters.tournaments.payload.TournmentPlayerDTO;
 import com.challengebackend.common.valueobjects.ReturnMessage;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface TournamentsService {
 
     ReturnMessage removePlayerToTournament(Long tournamentId, TournamentPlayerForm form);
 
-    List<String> findAllPlayersByTournamentId(Long tournamentId);
+    List<TournmentPlayerDTO> findAllPlayersByTournamentId(Long tournamentId);
 
     ReturnMessage finalizeTournament(Long tournamentId);
 
