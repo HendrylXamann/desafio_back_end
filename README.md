@@ -46,12 +46,6 @@ Após subir o projeto, acesse:
 http://localhost:8080/swagger-ui.html
 ```
 
-Ou via Springdoc:
-
-```
-http://localhost:8080/swagger-ui/index.html
-```
-
 ## 🗃️ Estrutura de pacotes
 
 - `controller`: Endpoints REST organizados por entidade
